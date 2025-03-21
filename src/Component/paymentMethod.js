@@ -17,6 +17,9 @@ const PaymentMethod = () => {
     alert("You Want To Pay with " + selectedMethod);
     navigate('/success');
   }
+  function handleCard(){
+    navigate('/newcard');
+  }
 
   return (
     <div className="container">
@@ -65,7 +68,7 @@ const PaymentMethod = () => {
                   <p>XXXX XXXX XXXX 5678</p>
                   <span className="visa-logo">VISA</span>
                 </div>
-                <div className="card add-card">+</div>
+                <div className="card add-card" onClick={handleCard}>+</div>
               </div>
 
               <div className="heading-container">

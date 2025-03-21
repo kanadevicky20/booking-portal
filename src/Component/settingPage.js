@@ -8,6 +8,9 @@ const SettingsPage = () => {
   function handleProfile(){
     Navigate('/profile');
   }
+  function handleBilling(){
+    Navigate('/billing');
+  }
 
   const billingHistory = [
     { invoice: 1, date: "Jan 1, 2025", time: "10:00 AM", bookingId: "123456", slotDate: "Jan 2, 2025", slotTime: "10:00 AM - 12:00 PM", status: "PAID" },
@@ -18,11 +21,10 @@ const SettingsPage = () => {
   return (
     <div className="container">
       <p>Manage your account settings and preferences</p>
-
       {/* Navigation Tabs */}
       <div className="settings-tabs">
         <button onClick={handleProfile} className="active">PROFILE</button>
-        <button className="active">Billings History</button>
+        <button onClick={handleBilling} className="active">Billings History</button>
         <button>FAQ</button>
         <button>HELP</button>
       </div>

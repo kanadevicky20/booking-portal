@@ -1,13 +1,30 @@
+.tabs {
+  display: flex;
+  gap: 0px;
+  margin-top: 20px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  background: #073c60;
+  color: white;
+}
+
+
 .profile-container {
     width: 90%;
-    max-width: 1000px;
+    max-width: 1300px;
     margin: auto;
-    
     padding: 20px;
     background: #dce8f2;
-    border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    padding-top: 150px;
+    padding-top: 170px;
   }
   
   .profile-title {
@@ -23,8 +40,6 @@
   
   .tabs {
     display: flex;
-    gap: 38px;
-    margin-top: 15px;
   }
   
   .active-tab {
@@ -63,8 +78,8 @@
 }
   
   .profile-picture {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     background: #ccc;
     border-radius: 10px;
     margin: auto;
@@ -72,6 +87,7 @@
     align-items: center;
     justify-content: center;
   }
+
   .placeholder:hover{
     color:#425d5b;
   }
@@ -87,16 +103,55 @@
     background: #073c60;
     color: white;
     padding: 8px 20px;
-    border-radius: 5px;
     cursor: pointer;
     display: block;
     margin: 30px auto;
     width: fit-content;
   }
+
   .upload-btn:hover{
   background-color: #ffcc00;
   color: black;
   }
+
+  /* Header (Navbar) */
+  .profile-header {
+    height: 40px;
+    width: 100%;
+    background:#0c2d48;
+    color:gray;
+    display: flex;  /* Ensures proper flex layout */
+    justify-content: space-between; /* Spreads elements across navbar */
+    align-items: center; /* Keeps items vertically aligned */
+    overflow: hidden; /* Prevents content overflow */
+    box-sizing: border-box; /* Ensures padding doesn’t cause overflow */
+    white-space: nowrap; /* Prevents wrapping */
+    cursor: default;
+    margin-bottom: 100px;
+}
+
+  
+  .profile-header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  /* Navigation Links */
+  .profile-header-nav {
+    display: flex;
+    gap: 20px;
+    padding:25px 25px;
+    font-weight: bold;
+  }
+  
+  .profile-header-nav a{
+    margin-left:80px;
+  }
+  
+  .profile-header-nav a:hover {
+    color:white
+  }
+
   
   .delete-btn {
     background: lightgray;

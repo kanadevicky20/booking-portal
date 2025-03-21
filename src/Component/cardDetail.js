@@ -11,7 +11,7 @@ const CardDetails = () => {
       <div className="main-content">
         {/* Card Details Form */}
         <div className="card-details-box">
-          <h2>Card Details</h2>
+          <h2>Add Card</h2>
           <hr />
           
           <label>Credit / Debit Card Number</label>
@@ -34,20 +34,30 @@ const CardDetails = () => {
             </div>
           </div>
 
-          <button className="pay-button">Pay</button>
+          <button className="pay-button">ADD</button>
         </div>
 
-        {/* Summary Section */}
-        <div className="summary-box">
-          <h3>1 Ad Slot</h3>
-          <p><strong>Sun, 26 Jan, 2025</strong></p>
-          <p>09:00 PM - 10:00 PM</p>
-          <p>App Name <br /> XYZ - Mumbai</p>
-          <hr />
-          <p><strong>Sub-total:</strong> ₹ XXX.XX</p>
-          <p><strong>Booking Fee:</strong> ₹ XXX.XX</p>
-          <p><strong>Total Amount:</strong> ₹ XXX.XX</p>
-        </div>
+        {/* Ad Slot Summary Inside Payment Box */}
+        <div className="summary-box-payment">
+                  <div className="summary-card ">
+                    <h3>1 Ad Slot <span>₹ XXX.XX</span></h3>
+                    <p><strong>Sun, 26 Jan, 2025</strong></p>
+                    <p>09:00 PM - 10:00 PM</p>
+                    <p><strong>App Name</strong></p>
+                    <p>XYZ - Mumbai</p>
+                  </div>
+
+             
+
+                  <div className="summary-details">
+                    <p>Sub-total <span>₹ XXX.XX</span></p>
+                    <p>Booking Fee <span>₹ XXX.XX</span></p>
+                    <p className="total-amount">Total Amount <span>₹ XXX.XX</span></p>
+                  </div>
+
+              <button className="button" >Proceed To Payment</button>
+             
+            </div>
       </div>
     </div>
     </>

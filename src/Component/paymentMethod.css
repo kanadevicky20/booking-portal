@@ -39,6 +39,7 @@
 
 /* Card Container */
 .card-container {
+    height: 150px;
     display: flex;
     justify-content: flex-start;
     gap: 15px;
@@ -80,7 +81,7 @@
 /* Summary Box */
 .summary-box-payment {
     width: 28%;
-    height: 78vh;
+    height: 58vh;
     margin-top: 0px;
     background: #cceeff;
     padding: 20px;
@@ -113,7 +114,7 @@
 
 /* Button */
 .button {
-    background: #3b82f6;
+    background: #002d5b;
     color: white;
     padding: 10px;
     border-radius: 8px;
@@ -125,5 +126,5 @@
 }
 
 .button:hover {
-    background: #2563eb;
+    background: #ffcc00;
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../Component/profile.css"
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [profileImage, setProfileImage] = useState(null);
@@ -7,6 +8,8 @@ const Profile = () => {
   const [email, setEmail] = useState("baviskarrushikesh03@gmail.com");
   const [phone, setPhone] = useState("+91 7378727976");
   const [company, setCompany] = useState("Update soon...");
+
+  const Navigate=useNavigate();
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -18,17 +21,28 @@ const Profile = () => {
   const handleDeleteImage = () => {
     setProfileImage(null);
   };
+  function handleHome(){
+    Navigate('/bookingdb')
+  }
+  function handleBilling(){
+    Navigate('/billing')
+}
+
 
   return (
     <div className="profile-container">
-      <h2 className="profile-title">Profile</h2>
+      {/* <h2 className="profile-title">Profile</h2> */}
+      <h1>settings</h1>
+
       <p className="profile-subtitle">Manage your account settings and preferences</p>
 
       {/* Tabs Section */}
-      <div className="tabs">
-        <button className="upload-btn">Home</button>
-        <button className="inactive-tab">Billings History</button>
-        <button className="inactive-tab">FAQ</button>
+      <div className="profile-header">
+        <nav className="profile-header-nav">
+        <a className="" onClick={handleHome}>HOME</a>
+        <a className="" onClick={handleBilling}>BILLING HISTORY</a>
+        <a className="" >FAQ</a>
+        </nav>
       </div>
 
       <div className="profile-content">

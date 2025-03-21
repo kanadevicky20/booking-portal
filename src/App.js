@@ -10,6 +10,8 @@ import SettingsPage from "./Component/settingPage";
 import CardDetails from "./Component/cardDetail";
 import Profile from "./Component/profile";
 import BookingSuccess from "./Component/bookingSuccess";
+import BillingHistory from "./Component/billingHistory";
+import AddCard from "./Component/addCard";
 
 
 function App() {
@@ -37,10 +39,13 @@ function MainLayout() {
         <Route path="/imagesummary" element={<ImageUploadSummary />} />
         <Route path="/paymethod" element={<PaymentMethod />} />
         <Route path="/bookingdb" element={<BookingTable />} />
-        <Route path="/setting" element={<SettingsPage />} />
+        <Route path="/setting" element={<Profile/>} />
         <Route path="/payment" element={<CardDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/success" element={<BookingSuccess />} />
+        <Route path="/billing" element={<BillingHistory />} />
+        <Route path="/newcard" element={<AddCard />} />
+
       </Routes>
     </>
   );
