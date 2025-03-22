@@ -34,9 +34,9 @@ const PaymentMethod = () => {
             <div className="">
       <h2>Select Payment Method</h2>
              
-              <label className="save-card">
+              {/* <label className="save-card">
                 <input type="checkbox" /> Save Card
-              </label>
+              </label> */}
       <div className="heading-container">
                         <span className="line"></span>
                         <h3>Pay using Credit / Debit Card</h3>

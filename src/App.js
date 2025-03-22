@@ -40,7 +40,7 @@ function MainLayout() {
         <Route path="/paymethod" element={<PaymentMethod />} />
         <Route path="/bookingdb" element={<BookingTable />} />
         <Route path="/setting" element={<Profile/>} />
-        <Route path="/payment" element={<CardDetails />} />
+        {/* <Route path="/payment" element={<CardDetails />} /> */}
         <Route path="/profile" element={<Profile />} />
         <Route path="/success" element={<BookingSuccess />} />
         <Route path="/billing" element={<BillingHistory />} />

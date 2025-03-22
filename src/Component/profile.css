@@ -22,9 +22,9 @@
     max-width: 1300px;
     margin: auto;
     padding: 20px;
-    background: #dce8f2;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    padding-top: 170px;
+    background: white;
+    /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+    padding-top: 170px;    
   }
   
   .profile-title {
@@ -36,6 +36,7 @@
   .profile-subtitle {
     color: gray;
     font-size: 14px;
+    border-bottom: 1px solid #ccc; /* Adjust thickness and color as needed */
   }
   
   .tabs {
@@ -107,6 +108,7 @@
     display: block;
     margin: 30px auto;
     width: fit-content;
+    border-radius: 5px;
   }
 
   .upload-btn:hover{
@@ -128,6 +130,7 @@
     white-space: nowrap; /* Prevents wrapping */
     cursor: default;
     margin-bottom: 100px;
+    margin-top: 8px;
 }
 
   
@@ -207,10 +210,16 @@
     cursor: pointer;
     width: 35%;
     align-self: center;
+    margin-right: 100px;
   }
   
   .edit-profile-btn:hover {
     background-color: #ffcc00;
     color: black;
+  }
+  
+  .profile-buttons {
+    display: flex;
+    margin-top: 10px;
   }
   

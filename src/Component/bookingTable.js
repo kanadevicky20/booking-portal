@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../Component/bookingTable.css";
 import DataTable from "react-data-table-component";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 const bookingsData = [
@@ -33,9 +34,10 @@ const bookingsData = [
 
 const BookingTable = () => {
 
+  const Navigate = useNavigate();
   const [selectedCity, setSelectedCity] = useState("All");
   function handleClick(){
-
+   Navigate('/booking')
   }
   const columns = [
     {
@@ -63,7 +65,7 @@ const BookingTable = () => {
         name: 'Book',
         cell: row => (
             <button className="book-button" onClick={() => handleClick(row)}>
-                Edit
+                Book
             </button>
         ),
     },
@@ -103,6 +105,8 @@ const customStyles = {
        data={bookingsData}
        fixedHeader={true}
        pagination={true}
+       paginationPerPage={10}
+       paginationRowsPerPageOptions={[10]}
        customStyles={customStyles}
        striped={true}
        />
@@ -144,11 +148,11 @@ const customStyles = {
             </div>
 
             {/* Pagination Moved Inside Filters */}
-            <div className="pagination">
+            {/* <div className="pagination">
               <button>Previous</button>
               <span>Page 1 of 2</span>
               <button>Next</button>
-            </div>
+            </div> */}
           </div>
 
 

@@ -1,9 +1,62 @@
 import React, { useState } from "react";
 import "../Component/billingHistory.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import DataTable from "react-data-table-component";
+
 
 const BillingHistory = () => {
   const Navigate = useNavigate();
+  const location = useLocation();
+  const obj = [
+    { id: 1, time: "10:00am", status: "PAID", date: "26-Jan-2025",bookingid:"1234556", slotdate: "26-Jan-2025", slottime: "01:00 pm to 4:00 pm" },
+    { id: 2, time: "10:00am", status: "FAILED", date: "26-Jan-2025",bookingid:"1234556", slotdate: "26-Jan-2025", slottime: "01:00 pm to 4:00 pm" },
+    { id: 3, time: "12:00am", status: "PAID", date: "26-Jan-2025",bookingid:"1234556", slotdate: "26-Jan-2025", slottime: "01:00 pm to 4:00 pm" },
+    { id: 4, time: "10:00am", status: "PAID", date: "26-Jan-2025",bookingid:"1234556", slotdate: "26-Jan-2025", slottime: "01:00 pm to 4:00 pm" }
+  ]
+
+  const columns = [
+    {
+        name: 'INVOICE',
+        selector: row => row.id,
+    },
+    {
+      name: 'DATE',
+      selector: row => row.date,
+  },
+  {
+    name: 'TIME',
+    selector: row => row.time,
+},{
+  name: 'BOOKING ID',
+  selector: row => row.bookingid,
+},{
+  name: 'SLOT DATE',
+  selector: row => row.slotdate,
+},{
+  name: 'SLOT TIME',
+  selector: row => row.slottime,
+},{
+  name: 'STATUS',
+  selector: row => row.status,
+},];
+
+const customStyles = {
+  headCells: {
+    style: {
+      backgroundColor: "#073C60", // Blue header background
+      color: "white", // White text color
+      fontSize: "16px",
+      fontWeight: "bold",
+      textAlign: "center"
+
+    }
+  },
+  table: {
+    style: {
+      width: "100%",  // Full width of the container
+    }
+  },
+};
 
   function handleHome() {
     Navigate('/bookingdb');
@@ -27,15 +80,28 @@ const BillingHistory = () => {
       setCurrentPage(currentPage + 1);
     }
   };
+  const billingPaths = ["/billing", ""];
 
   return (
-    <div className="billing-container">
+   <div className="container">
+   <div className="billing-container">
         <h1>Settings</h1>
       {/* Tabs Section */}
       <div className="billing-header">
         <nav className="billing-header-nav">
-          <a onClick={handleHome}>HOME</a>
-          <a onClick={handleProfile}>PROFILE</a>
+        <a
+            // onClick={() => navigate('/billing')}
+            style={{
+              color: billingPaths.includes(location.pathname) ? "white" : "gray",
+              fontWeight: billingPaths.includes(location.pathname) ? "bold" : "bold",
+              cursor: "pointer",
+              transition: "color 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "white")}
+            onMouseLeave={(e) => (e.target.style.color = billingPaths.includes(location.pathname) ? "white" : "gray")}
+          >
+            BILLING HISTORY
+          </a>          <a onClick={handleProfile}>PROFILE</a>
           <a>FAQ</a>
           <a>HELP</a>
         </nav>
@@ -46,7 +112,7 @@ const BillingHistory = () => {
       <p className="payment-subtitle">Update your billing details and address</p>
 
       {/* Card Details */}
-      <div className="card-details">
+      <div className="card-details1">
         <h3>Card Details</h3>
         
       </div>
@@ -62,8 +128,7 @@ const BillingHistory = () => {
           <div>
             <label>Card Number</label>
             <div className="card-number">
-              <span className="card-logo">💳</span>
-              <input type="text" placeholder="XXXX XXXX XXXX XXXX" />
+              <input type="text" placeholder="💳 XXXX XXXX XXXX XXXX" />
             </div>
           </div>
           <div>
@@ -77,7 +142,7 @@ const BillingHistory = () => {
         <h3>Contact email</h3>
         <p>Where should invoice be sent?</p>
         <div className="email-options">
-          <input type="radio" name="email" checked readOnly />
+          {/* <input type="radio" name="email" checked readOnly /> */}
           <span>Send to the existing email</span>
           <p className="email-text">[XXXXXXXXXXXX@gamil.com]</p>
           <button className="add-email">➕ Add another email address</button>
@@ -87,8 +152,25 @@ const BillingHistory = () => {
 
       {/* Billing History Table */}
       <div className="billing-history">
-        <h3>Billing History</h3>
+        <h3>Billing History
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
 
+        <label>Filter by- </label>
+          <select className="filter-tag">
+            <option>Date</option>
+            <option>Amount</option>
+            <option>Status</option>
+          </select>
+        </h3>
         {/* Filter Section */}
         <div className="filter-section">
         <p>See the transactions you made 
@@ -105,58 +187,21 @@ const BillingHistory = () => {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
         </p>
-          <label>FILTER BY</label>
-          <select>
-            <option>Date</option>
-            <option>Amount</option>
-            <option>Status</option>
-          </select>
-          <input type="date" />
-          <input type="date" />
+          
+          <input className="input-tag" type="date" />
+          <label>to </label>
+          <input className="input-tag" type="date" />
         </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>INVOICE</th>
-              <th>DATE</th>
-              <th>TIME</th>
-              <th>BOOKING ID</th>
-              <th>SLOT DATE</th>
-              <th>SLOT TIME</th>
-              <th>STATUS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Jan 26, 2025</td>
-              <td>10:00 AM</td>
-              <td>53456327</td>
-              <td>Jan 26, 2025</td>
-              <td>09:00 AM - 10:00 AM</td>
-              <td className="paid">PAID</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jan 20, 2025</td>
-              <td>12:00 PM</td>
-              <td>53456327</td>
-              <td>Jan 20, 2025</td>
-              <td>01:00 PM - 02:00 PM</td>
-              <td className="paid">PAID</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Jan 18, 2025</td>
-              <td>09:30 AM</td>
-              <td>53456327</td>
-              <td>Jan 18, 2025</td>
-              <td>05:00 PM - 06:00 PM</td>
-              <td className="failed">FAILED</td>
-            </tr>
-          </tbody>
-        </table>
+
+
+        <DataTable 
+        data={obj} 
+        columns={columns}
+        dense
+        customStyles={customStyles}
+
+        />
 
         {/* Pagination Buttons at Bottom */}
         <div className="pagination-buttons">
@@ -167,6 +212,7 @@ const BillingHistory = () => {
         
       </div>
     </div>
+   </div>
   );
 };
 

@@ -7,6 +7,50 @@
   background-color: #e6f4ff;
 }
 
+/* Summary Box */
+.summary-box-payment1 {
+  width: 28%;
+  height: 55vh;
+  margin-top: 0px;
+  background: #cceeff;
+  padding: 20px;
+  margin-bottom: 100px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ad Slot Summary */
+.summary-card {
+  height: 20vh;
+  border: 2px solid #0c2d48;
+  border-radius: 10px;
+  padding: 10px;
+  background: #d6ebff;
+  justify-content: space-around;
+}
+.summary-card h3{
+  padding: 15px;
+  border-bottom: 1px solid #ccc; /* Adjust thickness and color as needed */
+  border-top: 1px solid #ccc; /* Adjust thickness and color as needed */
+
+}
+p{
+  padding: 6px;
+}
+.summary-details {
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
+
+.total-amount {
+  font-weight: bold;
+  font-size: 18px;
+  
+}
+
 /* Success Box */
 .success-box {
   display: flex;
@@ -97,6 +141,7 @@ h3 {
   font-weight: bold;
   font-size: 18px;
   margin-top: 10px;
-}
+  border-bottom: 1px solid #ccc; /* Adjust thickness and color as needed */
+  border-top: 1px solid #ccc; /* Adjust thickness and color as needed */}
 
 

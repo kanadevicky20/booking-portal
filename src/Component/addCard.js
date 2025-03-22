@@ -9,6 +9,10 @@ import '../Component/addCard.css';
     function handleBooking() {
         Navigate('/success');
       }
+      function handlePayment() {
+        Navigate('/paymethod');
+      }
+
   return (
     <div className="container">
        <div className="main-content">
@@ -18,6 +22,7 @@ import '../Component/addCard.css';
               
             <div className="payment-container">
             <div className=""> <h2>Add Card</h2> 
+            <button className='back-btn' onClick={handlePayment}>Back</button>
             <div className="card-form">
   <label>Credit / Debit Card Number</label>
   <div className="card-input">
@@ -55,6 +60,11 @@ import '../Component/addCard.css';
   required
 />
     </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <div>
       <label>CVV</label>
       <input 
@@ -70,7 +80,7 @@ import '../Component/addCard.css';
     </div>
   </div>
 
-  <button className="pay-button">Pay</button>
+  <button className="pay-button">Add</button>
 </div>
          
             </div>

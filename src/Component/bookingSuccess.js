@@ -39,7 +39,7 @@ const BookingSuccess = () => {
         </div>
 
         {/* Right Section - Booking Details */}
-        <div className="summary-box-payment">
+        <div className="summary-box-payment1">
           <div className="summary-card">
             <h3>1 Ad Slot</h3>
             <p>Sun, 26 Jan, 2025</p>

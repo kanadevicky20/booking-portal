@@ -17,29 +17,52 @@ function Navbar() {
     Navigate('/setting');
   }
   function handleBooking(){
-    Navigate('/booking');
+    Navigate('/bookingdb');
   }
   
+   // Define booking-related paths
+   const bookingPaths = ["/booking", "/bookingdb", "/imagesummary"];
+   const isBookingActive = bookingPaths.some(path => location.pathname.includes(path));
+
+     // Define setting-related paths
+  const settingPaths = ["/setting", "/profile", "/billing"];
+  const isSettingActive = settingPaths.some(path => location.pathname.includes(path));
+
+
   return (
     <div>
       {/* Header Section */}
       <header className="header">
       <h1>Logo</h1>
       <nav className="header-nav">
-        <a
-          hidden={isLogin === "false"}
-          onClick={handleBooking}
-          style={location.pathname === "/booking" ? { color: "white", fontWeight: "bold" } : {}}
-        >
-          BOOKING
-        </a>
-        <a
-          hidden={isLogin === "false"}
-          onClick={handleSetting}
-          style={location.pathname === "/setting" ? { color: "white", fontWeight: "bold" } : {}}
-        >
-          SETTING
-        </a>
+      <a
+            hidden={isLogin === "false"}
+            onClick={handleBooking}
+            style={{
+              color: isBookingActive ? "white" : "gray",
+              fontWeight: isBookingActive ? "bold" : "bold",
+              cursor: "pointer",
+              transition: "color 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "white")}
+            onMouseLeave={(e) => (e.target.style.color = isBookingActive ? "white" : "gray")}
+          >
+            BOOKING
+          </a>
+          <a
+            hidden={isLogin === "false"}
+            onClick={handleSetting}
+            style={{
+              color: isSettingActive ? "white" : "gray",
+              fontWeight: isSettingActive ? "bold" : "bold",
+              cursor: "pointer",
+              transition: "color 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "white")}
+            onMouseLeave={(e) => (e.target.style.color = isSettingActive ? "white" : "gray")}
+          >
+            SETTING
+          </a>
         <a
   hidden={isLogin === "false"}
   onClick={handleLogout}

@@ -29,7 +29,7 @@
     max-height: 100vh; /* Prevent it from going beyond the screen height */
     flex: auto;
     background: white;
-    padding: 20px;
+    padding: 40px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden; /* Completely disables scrolling */
@@ -53,7 +53,7 @@
   }
   
   .booking-table .book-button {
-    background: #073c60;
+    background:green;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -62,7 +62,7 @@
   }
   
   .booking-table .book-button:hover {
-    background: #055184;
+    background: greenyellow;
   }
   
   /* Pagination */
