@@ -4,9 +4,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 const ImageUploadSummary = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const rowData=location.state.rowData;
+  const image=location.state.image;
+  const token=location.state.token;
+  console.log("location.state:",location.state);
+const data={...rowData,image,token};
+
+
 
   function handlePayment() {
-    navigate("/paymethod");
+    navigate("/paymethod",{state:{data:data}});
   }
 
   return (
@@ -52,16 +59,16 @@ const ImageUploadSummary = () => {
         <div className="summary-box">
           <div className="summary-card">
             <h3>
-              1 Ad Slot <span>₹ XXX.XX</span>
+              1 Ad Slot <span>₹ {rowData.booking_amount}.00</span>
             </h3>
             <p>
-              <strong>Sun, 26 Jan, 2025</strong>
+              <strong>{rowData.slot_date}</strong>
             </p>
-            <p>09:00 PM - 10:00 PM</p>
+            <p>{rowData.start_time} - {rowData.end_time}</p>
             <p>
               <strong>App Name</strong>
             </p>
-            <p>XYZ - Mumbai</p>
+            <p>{rowData.city_name}</p>
           </div>
 
           <hr />
@@ -69,14 +76,14 @@ const ImageUploadSummary = () => {
           <div className="summary-card">
           <div className="summary-details">
             <p>
-              Sub-total <span>₹ XXX.XX</span>
+              Sub-total <span>₹ {rowData.booking_amount}.00</span>
             </p>
             <p>
-              Booking Fee <span>₹ XXX.XX</span>
+              Booking Fee <span>₹ 15.00</span>
             </p>
             <p>_______________________________</p>
             <p className="total-amount">
-              Total Amount <span>₹ XXX.XX</span>
+              Total Amount <span>₹ {rowData.booking_amount+15}.00</span>
             </p>
           </div>
           </div>

@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import "../Component/login.css";
 import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from '../API Manager/userFunctions';
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [password, setPassword] = useState('');
+  const [loginData,setLoginData]=useState({username:'',password:''});
   const navigate = useNavigate();
+
+  // {
+  //   "email": "eve.holt@reqres.in",
+  //   "password": "cityslicka"
+  // }
 
   // // Show alert only once when the page loads
   // useEffect(() => {
@@ -14,13 +21,30 @@ function Login() {
   //   }, 100); // Small delay to ensure smoother user experience
   // }, []);
 
-  function handleLogin() {
-    if (username === 'vicky' && password === 'pass') {
+  async function handleLogin() {
+
+    if (loginData.username === 'vicky' && loginData.password === 'pass') {
       sessionStorage.setItem("islogin", 'true');
       navigate('/bookingdb');
     } else {
-      alert('Wrong Credentials');
+      console.log("login data:",loginData);
+      
+       const res=await loginUser(loginData);
+      if(res){
+        console.log("res from api:",res);
+        if(res.data.token){
+          sessionStorage.setItem("islogin", 'true');
+          navigate('/bookingdb', { state: { token: res.data?.token } });
+        }
+      }
+      else{
+        alert('Wrong Credentials');
+      }
     }
+  }
+
+  function handleChange(e){
+      setLoginData({...loginData,[e.target.name]:e.target.value});
   }
 
   return (
@@ -42,8 +66,8 @@ function Login() {
               type="email" 
               placeholder="user@example.com"
               name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={loginData.username}
+              onChange={handleChange}
               required
               onKeyDown={(e) => e.key === "Enter" && handleLogin()} // Press Enter to Login
             />
@@ -55,8 +79,8 @@ function Login() {
               type="password" 
               placeholder="password123"
               name='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)} 
+              value={loginData.password}
+              onChange={handleChange} 
               required
               onKeyDown={(e) => e.key === "Enter" && handleLogin()} // Press Enter to Login
             />

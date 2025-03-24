@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./BookingPage.css"; // Ensure this CSS file contains required styles
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HomeIcon from '@mui/icons-material/Home';
@@ -8,8 +8,23 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import DehazeIcon from '@mui/icons-material/Dehaze';
 
 const BookingPage = () => {
+  const location=useLocation();
   const [image, setImage] = useState(null);
+  const rowData=location?.state.data;
+  const token=location?.state.token;
+  console.log("rowdata:",rowData,"token:",token);
   const navigate = useNavigate();
+  const [uploadImageData,setUploadImageData]=useState({image: "string",bookingId:rowData?.ad_slot_booking_id,payment_status: "string",booking_status: "string",booking_amount:rowData?.booking_amount,access_token:token})
+
+
+  // {
+  //   "image": "string",
+  //   "bookingId": 0,
+  //   "payment_status": "string",
+  //   "booking_status": "string",
+  //   "booking_amount": 0,
+  //   "access_token": "string"
+  // }
 
   // Handle Image Upload
   const handleImageUpload = (event) => {
@@ -17,13 +32,16 @@ const BookingPage = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setImage(imageUrl);
+      setUploadImageData({...uploadImageData,image:imageUrl})
     }
   };
 
   // Navigate to Image Summary Page
   const handleImageSelection = () => {
+    console.log("image data:",uploadImageData);
+    
     if (image) {
-      navigate("/imagesummary", { state: { image } });
+      navigate("/imagesummary", { state: { image:image,rowData:rowData,token:token } });
     }
   };
 
@@ -36,11 +54,11 @@ const BookingPage = () => {
           <h2>Booking Details</h2>
           <hr />
           <div className="details">
-            <p><strong>Booking Status:</strong> Available </p>
-            <p><strong>City Name:</strong> Available</p>
-            <p><strong>Slot Date:</strong> 26-Jan-2025</p>
-            <p><strong>Time:</strong> 01:00AM - 02:00AM</p>
-            <p><strong>Slot Rate:</strong> ₹XXX</p>
+            <p><strong>Booking Status:</strong> {""} </p>
+            <p><strong>City Name:</strong>{rowData.city_name}</p>
+            <p><strong>Slot Date:</strong>{rowData.slot_date}</p>
+            <p><strong>Time:</strong>{rowData.start_time}</p>
+            <p><strong>Slot Rate:</strong>{rowData.booking_amount}</p>
           </div>
 
          {/* Image Upload Box */}

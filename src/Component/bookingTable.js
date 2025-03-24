@@ -1,65 +1,95 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Component/bookingTable.css";
 import DataTable from "react-data-table-component";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { getAdSlotBooking } from "../API Manager/bookingFunctions";
+import { Token } from "@mui/icons-material";
 
 
 const bookingsData = [
-  { id: 545, slotId: 1, city: "Nashik", date: "26-Jan-2025", start: "11:00 pm", end: "12:00 am" },
-  { id: 546, slotId: 1, city: "Pune", date: "26-Jan-2025", start: "11:00 pm", end: "12:00 am" },
-  { id: 547, slotId: 1, city: "Mumbai", date: "26-Jan-2025", start: "11:00 pm", end: "12:00 am" },
-  { id: 548, slotId: 1, city: "Nagpur", date: "26-Jan-2025", start: "11:00 pm", end: "12:00 am" },
-  { id: 549, slotId: 1, city: "Nashik", date: "26-Jan-2025", start: "12:00 am", end: "01:00 pm" },
-  { id: 550, slotId: 1, city: "Pune", date: "26-Jan-2025", start: "12:00 am", end: "01:00 pm" },
-  { id: 551, slotId: 1, city: "Mumbai", date: "26-Jan-2025", start: "12:00 am", end: "01:00 pm" },
-  { id: 552, slotId: 1, city: "Nagpur", date: "26-Jan-2025", start: "12:00 am", end: "01:00 pm" },
-  { id: 553, slotId: 1, city: "Nashik", date: "26-Jan-2025", start: "01:00 pm", end: "02:00 pm" },
-  { id: 554, slotId: 1, city: "Pune", date: "26-Jan-2025", start: "01:00 pm", end: "02:00 pm" },
-  { id: 555, slotId: 1, city: "Mumbai", date: "26-Jan-2025", start: "01:00 pm", end: "02:00 pm" },
-  { id: 556, slotId: 1, city: "Nagpur", date: "26-Jan-2025", start: "01:00 pm", end: "02:00 pm" },
-  { id: 545, slotId: 1, city: "Nashik", date: "26-Jan-2025", start: "11:00 pm", end: "12:00 am" },
-  { id: 546, slotId: 1, city: "Pune", date: "26-Jan-2025", start: "11:00 pm", end: "12:00 am" },
-  { id: 547, slotId: 1, city: "Mumbai", date: "26-Jan-2025", start: "11:00 pm", end: "12:00 am" },
-  { id: 548, slotId: 1, city: "Nagpur", date: "26-Jan-2025", start: "11:00 pm", end: "12:00 am" },
-  { id: 549, slotId: 1, city: "Nashik", date: "26-Jan-2025", start: "12:00 am", end: "01:00 pm" },
-  { id: 550, slotId: 1, city: "Pune", date: "26-Jan-2025", start: "12:00 am", end: "01:00 pm" },
-  { id: 551, slotId: 1, city: "Mumbai", date: "26-Jan-2025", start: "12:00 am", end: "01:00 pm" },
-  { id: 552, slotId: 1, city: "Nagpur", date: "26-Jan-2025", start: "12:00 am", end: "01:00 pm" },
-  { id: 553, slotId: 1, city: "Nashik", date: "26-Jan-2025", start: "01:00 pm", end: "02:00 pm" },
-  { id: 554, slotId: 1, city: "Pune", date: "26-Jan-2025", start: "01:00 pm", end: "02:00 pm" },
-  { id: 555, slotId: 1, city: "Mumbai", date: "26-Jan-2025", start: "01:00 pm", end: "02:00 pm" },
-  { id: 556, slotId: 1, city: "Nagpur", date: "26-Jan-2025", start: "01:00 pm", end: "02:00 pm" },
+  { ad_slot_booking_id: 545, ad_slot_id: 1, city_name: "Nashik", slot_date: "26-Jan-2025", start_time: "11:00 pm", end_time: "12:00 am",booking_amount:120 },
+  { ad_slot_booking_id: 547, ad_slot_id: 1, city_name: "Mumbai", slot_date: "26-Jan-2025", start_time: "11:00 pm", end_time: "12:00 am",booking_amount:130 },
+  { ad_slot_booking_id: 546, ad_slot_id: 1, city_name: "Pune", slot_date: "26-Jan-2025", start_time: "11:00 pm", end_time: "12:00 am",booking_amount:160 },
+  { ad_slot_booking_id: 548, ad_slot_id: 1, city_name: "Nagpur", slot_date: "26-Jan-2025", start_time: "11:00 pm", end_time: "12:00 am",booking_amount:108 },
+  { ad_slot_booking_id: 549, ad_slot_id: 1, city_name: "Nashik", slot_date: "26-Jan-2025", start_time: "12:00 am", end_time: "01:00 pm",booking_amount:200 },
+  { ad_slot_booking_id: 550, ad_slot_id: 1, city_name: "Pune", slot_date: "26-Jan-2025", start_time: "12:00 am", end_time: "01:00 pm",booking_amount:1320 },
+  { ad_slot_booking_id: 551, ad_slot_id: 1, city_name: "Mumbai", slot_date: "26-Jan-2025", start_time: "12:00 am", end_time: "01:00 pm",booking_amount:1300 },
+  { ad_slot_booking_id: 552, ad_slot_id: 1, city_name: "Nagpur", slot_date: "26-Jan-2025", start_time: "12:00 am", end_time: "01:00 pm",booking_amount:1010 },
+  { ad_slot_booking_id: 553, ad_slot_id: 1, city_name: "Nashik", slot_date: "26-Jan-2025", start_time: "01:00 pm", end_time: "02:00 pm",booking_amount:1020 },
+  { ad_slot_booking_id: 554, ad_slot_id: 1, city_name: "Pune", slot_date: "26-Jan-2025", start_time: "01:00 pm", end_time: "02:00 pm",booking_amount:1100 },
+  { ad_slot_booking_id: 555, ad_slot_id: 1, city_name: "Mumbai", slot_date: "26-Jan-2025", start_time: "01:00 pm", end_time: "02:00 pm",booking_amount:2100 },
+  { ad_slot_booking_id: 556, ad_slot_id: 1, city_name: "Nagpur", slot_date: "26-Jan-2025", start_time: "01:00 pm", end_time: "02:00 pm",booking_amount:3100 },
+  { ad_slot_booking_id: 545, ad_slot_id: 1, city_name: "Nashik", slot_date: "26-Jan-2025", start_time: "11:00 pm", end_time: "12:00 am",booking_amount:2100 },
+  { ad_slot_booking_id: 546, ad_slot_id: 1, city_name: "Pune", slot_date: "26-Jan-2025", start_time: "11:00 pm", end_time: "12:00 am",booking_amount:1030 },
+  { ad_slot_booking_id: 547, ad_slot_id: 1, city_name: "Mumbai", slot_date: "26-Jan-2025", start_time: "11:00 pm", end_time: "12:00 am",booking_amount:1300 },
+  { ad_slot_booking_id: 548, ad_slot_id: 1, city_name: "Nagpur", slot_date: "26-Jan-2025", start_time: "11:00 pm", end_time: "12:00 am",booking_amount:1040 },
+  { ad_slot_booking_id: 549, ad_slot_id: 1, city_name: "Nashik", slot_date: "26-Jan-2025", start_time: "12:00 am", end_time: "01:00 pm",booking_amount:1600 },
+  { ad_slot_booking_id: 550, ad_slot_id: 1, city_name: "Pune", slot_date: "26-Jan-2025", start_time: "12:00 am", end_time: "01:00 pm",booking_amount:500 },
+  { ad_slot_booking_id: 551, ad_slot_id: 1, city_name: "Mumbai", slot_date: "26-Jan-2025", start_time: "12:00 am", end_time: "01:00 pm",booking_amount:600 },
+  { ad_slot_booking_id: 552, ad_slot_id: 1, city_name: "Nagpur", slot_date: "26-Jan-2025", start_time: "12:00 am", end_time: "01:00 pm",booking_amount:700 },
+  { ad_slot_booking_id: 553, ad_slot_id: 1, city_name: "Nashik", slot_date: "26-Jan-2025", start_time: "01:00 pm", end_time: "02:00 pm",booking_amount:800 },
+  { ad_slot_booking_id: 554, ad_slot_id: 1, city_name: "Pune", slot_date: "26-Jan-2025", start_time: "01:00 pm", end_time: "02:00 pm",booking_amount:900 },
+  { ad_slot_booking_id: 555, ad_slot_id: 1, city_name: "Mumbai", slot_date: "26-Jan-2025", start_time: "01:00 pm", end_time: "02:00 pm",booking_amount:1000 },
+  { ad_slot_booking_id: 556, ad_slot_id: 1, city_name: "Nagpur", slot_date: "26-Jan-2025", start_time: "01:00 pm", end_time: "02:00 pm",booking_amount:100 },
 
 ];
 
 const BookingTable = () => {
 
+  const location = useLocation();
+  
   const Navigate = useNavigate();
+  const token = location.state?.token;
+  console.log("access_token:",location.state?.token);
   const [selectedCity, setSelectedCity] = useState("All");
-  function handleClick(){
-   Navigate('/booking')
-  }
+  const [adSlotBookingData,setAdSlotBookingData]=useState([]);
+  const [bookingData,setBookingData]=useState([]);
+
+  useEffect(()=>{
+      const res=getAdSlotBooking(token);
+      if(res){
+          setBookingData(res.data);
+      }
+  },[])
+
+  // {
+  //   "ad_slot_booking_id": 0,
+  //   "ad_slot_id": 0,
+  //   "city_name": "string",
+  //   "slot_date": "string",
+  //   "start_time": "string",
+  //   "end_time": "string",
+  //   "booking_status": "string",
+  //   "payment_status": "string",
+  //   "booking_amount": 0
+  // }
+  
+  
   const columns = [
     {
         name: 'Booking ID',
-        selector: row => row.id,
+        selector: row => row.ad_slot_booking_id,
     },
     {
       name: 'Slot ID',
-      selector: row => row.slotId,
+      selector: row => row.ad_slot_id,
   },
   {
     name: 'City Name',
-    selector: row => row.city,
+    selector: row => row.city_name,
 },{
   name: 'Slot Date',
-  selector: row => row.date,
+  selector: row => row.slot_date,
 },{
   name: 'Start Time',
-  selector: row => row.start,
+  selector: row => row.start_time,
 },{
   name: 'End Time',
-  selector: row => row.end,
+  selector: row => row.end_time,
+},
+,{
+  name: 'Booking Amount',
+  selector: row => row.booking_amount,
 },
     {
         name: 'Book',
@@ -88,6 +118,15 @@ const customStyles = {
     }
   },
 };
+
+function handleClick(row){
+  console.log("location.state:",location.state);
+  
+  console.log("row data",row);
+  console.log("token:",token);
+  
+  Navigate('/booking',{state:{data:row,token:token}});
+ }
 
   const filteredBookings =
     selectedCity === "All"

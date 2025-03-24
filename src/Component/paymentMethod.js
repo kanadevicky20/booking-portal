@@ -7,15 +7,25 @@ import googlepay from '../Images/googlepay.png';
 import sbi from '../Images/sbi.png';
 import hdfc from '../Images/hdfc.png';
 import axis from '../Images/axis.png';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { uploadImage } from "../API Manager/bookingFunctions";
 
 const PaymentMethod = () => {
+  const location=useLocation();
+  const data=location.state.data;
+  console.log("data location.state:",location.state.data);
+  
   const [selectedMethod, setSelectedMethod] = useState("card");
   const navigate = useNavigate();
+    const [uploadImageData,setUploadImageData]=useState({image: data.image,bookingId:data?.ad_slot_booking_id,payment_status: "Pass",booking_status: "Booked",booking_amount:data.booking_amount,access_token:data.token})
+
 
   function handleBooking() {
     alert("You Want To Pay with " + selectedMethod);
-    navigate('/success');
+    const res=uploadImage(uploadImageData);
+    if(res){
+      navigate('/success');
+    }
   }
   function handleCard(){
     navigate('/newcard');
@@ -103,19 +113,19 @@ const PaymentMethod = () => {
             {/* Ad Slot Summary Inside Payment Box */}
             <div className="summary-box-payment">
                   <div className="summary-card ">
-                    <h3>1 Ad Slot <span>₹ XXX.XX</span></h3>
-                    <p><strong>Sun, 26 Jan, 2025</strong></p>
-                    <p>09:00 PM - 10:00 PM</p>
+                    <h3>1 Ad Slot <span>₹ {data.booking_amount}.00</span></h3>
+                    <p><strong>{data.slot_date}</strong></p>
+                    <p>{data.start_time} - {data.end_time}</p>
                     <p><strong>App Name</strong></p>
-                    <p>XYZ - Mumbai</p>
+                    <p>City - {data.city_name}</p>
                   </div>
 
              
 
                   <div className="summary-details">
-                    <p>Sub-total <span>₹ XXX.XX</span></p>
-                    <p>Booking Fee <span>₹ XXX.XX</span></p>
-                    <p className="total-amount">Total Amount <span>₹ XXX.XX</span></p>
+                    <p>Sub-total <span>₹ {data.booking_amount}.00</span></p>
+                    <p>Booking Fee <span>₹ 15.00</span></p>
+                    <p className="total-amount">Total Amount <span>₹ {data.booking_amount+15}.00</span></p>
                   </div>
 
               <button className="button" onClick={handleBooking}>Proceed To Payment</button>
