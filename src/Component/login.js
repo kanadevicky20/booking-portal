@@ -32,10 +32,12 @@ function Login() {
           sessionStorage.setItem("token", res.data.token);
           navigate('/bookingdb', { state: { token: res.data?.token } });
         }
-    } else{
-      alert('Wrong Credentials or no data entered');
-    }
+    } 
   }
+  else{
+    alert('Wrong Credentials or no data entered');
+  }
+}
 
   function handleChange(e){
       setLoginData({...loginData,[e.target.name]:e.target.value});
