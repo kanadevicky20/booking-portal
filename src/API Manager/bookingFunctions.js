@@ -27,9 +27,9 @@ export async function uploadImage(data) {
           console.log("error:", error);
         } 
       }
-export async function fetchImage(token) {
+export async function fetchImage(id,token) {
         try {
-          return await axios.get(`${url}/fetch-image/bookingid`, { params: { authorization: token } })
+          return await axios.get(`${url}/fetch-image/${id}`, { params: { authorization: token } })
         } catch (error) {
           console.log("error:", error);
         } 

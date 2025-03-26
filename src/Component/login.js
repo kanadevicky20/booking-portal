@@ -34,6 +34,7 @@ function Login() {
         console.log("res from api:",res);
         if(res.data.token){
           sessionStorage.setItem("islogin", 'true');
+          sessionStorage.setItem("token", res.data.token);
           navigate('/bookingdb', { state: { token: res.data?.token } });
         }
       }

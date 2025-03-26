@@ -5,8 +5,11 @@ import DataTable from "react-data-table-component";
 
 
 const BillingHistory = () => {
+
+  const token=sessionStorage.getItem("token");
   const Navigate = useNavigate();
   const location = useLocation();
+  const [billingData,setBillingData]=useState([]);
   const obj = [
     { id: 1, time: "10:00am", status: "PAID", date: "26-Jan-2025",bookingid:"1234556", slotdate: "26-Jan-2025", slottime: "01:00 pm to 4:00 pm" },
     { id: 2, time: "10:00am", status: "FAILED", date: "26-Jan-2025",bookingid:"1234556", slotdate: "26-Jan-2025", slottime: "01:00 pm to 4:00 pm" },
@@ -63,6 +66,13 @@ const customStyles = {
   }
   function handleProfile() {
     Navigate('/profile');
+  }
+
+  function fetchImage(){
+    const res=fetchImage(1,token);
+    if(res){
+          setBillingData(res.data);
+    }
   }
 
   // Pagination State

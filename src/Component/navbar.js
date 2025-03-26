@@ -6,6 +6,7 @@ function Navbar() {
 
   const location = useLocation();
   const Navigate=useNavigate();
+  const token=sessionStorage.getItem("token");
 
   let isLogin=sessionStorage.getItem("islogin");
 
@@ -14,7 +15,7 @@ function Navbar() {
     Navigate('/login');
   }
   function handleSetting(){
-    Navigate('/setting');
+    Navigate('/setting',{state:{token:token}});
   }
   function handleBooking(){
     Navigate('/bookingdb');
