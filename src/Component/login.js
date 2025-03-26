@@ -23,13 +23,8 @@ function Login() {
 
   async function handleLogin() {
 
-    if (loginData.username === 'vicky' && loginData.password === 'pass') {
-      sessionStorage.setItem("islogin", 'true');
-      navigate('/bookingdb');
-    } else {
-      console.log("login data:",loginData);
-      
-       const res=await loginUser(loginData);
+    if (loginData.username != '' && loginData.password != '') {
+      const res=await loginUser(loginData);
       if(res){
         console.log("res from api:",res);
         if(res.data.token){
@@ -37,10 +32,8 @@ function Login() {
           sessionStorage.setItem("token", res.data.token);
           navigate('/bookingdb', { state: { token: res.data?.token } });
         }
-      }
-      else{
-        alert('Wrong Credentials');
-      }
+    } else{
+      alert('Wrong Credentials or no data entered');
     }
   }
 
